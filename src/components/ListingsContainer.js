@@ -1,11 +1,29 @@
 import React from "react";
-// import ListingCard from "./ListingCard";
+import ListingCard from "./ListingCard";
 
-function ListingsContainer() {
+function ListingsContainer({displayListings, searchQuery}) {
+
+
+  const RenderListingList = () => {
+    return listingListFiltered.map((displayListing) => (
+      <ListingCard 
+      {...displayListing} 
+      key={displayListing.id}
+      />
+      ))
+    }
+
+  const listingListFiltered = displayListings
+  .filter(displayListing => {
+    return (displayListing.description.toLowerCase()
+    .includes(searchQuery.toLowerCase()))
+  })
+
+
   return (
     <main>
       <ul className="cards">
-        {/* use the ListingCard component to display listings */}
+        {RenderListingList()}
       </ul>
     </main>
   );
